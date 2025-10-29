@@ -1,0 +1,48 @@
+{
+  "name": "workly",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Workly - Enterprise HR & Task Management Microfrontend Platform",
+  "author": "Hamza",
+  "license": "MIT",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "dev:landing": "pnpm --filter landing dev",
+    "dev:auth": "pnpm --filter auth dev",
+    "dev:shell": "pnpm --filter shell dev",
+    "dev:hr": "pnpm --filter hr-management dev",
+    "dev:task": "pnpm --filter task-manager dev",
+    "dev:announce": "pnpm --filter announcements dev",
+    "build": "turbo run build",
+    "build:landing": "pnpm --filter landing build",
+    "build:auth": "pnpm --filter auth build",
+    "build:shell": "pnpm --filter shell build",
+    "build:hr": "cd apps/hr-management && ng build --configuration production",
+    "build:task": "pnpm --filter task-manager build",
+    "build:announce": "pnpm --filter announcements build",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "type-check": "turbo run type-check"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.55.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.1.0",
+    "turbo": "^1.11.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.12.0"
+}
+
