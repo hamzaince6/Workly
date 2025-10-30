@@ -26,16 +26,13 @@ export default function Logo({ size = 'md', showText = true, className = '' }: L
   };
 
   return (
-    <Link href="/" className={`flex items-center gap-2 group ${className}`}>
+    <Link href="/" className={`flex items-center gap-2 ${className}`}>
       {/* Logo Icon */}
       <div className="relative">
-        {/* Gradient Background with Animation */}
+        {/* Gradient Background */}
         <div
-          className={`${sizes[size].container} bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105 relative overflow-hidden`}
+          className={`${sizes[size].container} bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-600 rounded-xl flex items-center justify-center shadow-lg relative overflow-hidden`}
         >
-          {/* Animated Shine Effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
-          
           {/* Letter W with geometric design */}
           <div className="relative">
             <svg
@@ -58,16 +55,13 @@ export default function Logo({ size = 'md', showText = true, className = '' }: L
           <div className="absolute top-0 right-0 w-3 h-3 bg-secondary-400 rounded-bl-lg opacity-50"></div>
           <div className="absolute bottom-0 left-0 w-3 h-3 bg-primary-700 rounded-tr-lg opacity-50"></div>
         </div>
-
-        {/* Glow Effect on Hover */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-400 to-secondary-400 rounded-xl blur-md opacity-0 group-hover:opacity-40 transition-opacity duration-300 -z-10"></div>
       </div>
 
       {/* Text */}
       {showText && (
         <div className="flex flex-col">
           <span
-            className={`${sizes[size].textSize} font-bold text-gray-900 group-hover:text-primary-600 transition-colors leading-none`}
+            className={`${sizes[size].textSize} font-bold text-primary-600 leading-none`}
           >
             Workly
           </span>
