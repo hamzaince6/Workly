@@ -191,15 +191,6 @@ importers:
 
   apps/landing:
     dependencies:
-      '@workly/shared-types':
-        specifier: workspace:*
-        version: link:../../packages/shared-types
-      '@workly/shared-ui':
-        specifier: workspace:*
-        version: link:../../packages/shared-ui
-      '@workly/shared-utils':
-        specifier: workspace:*
-        version: link:../../packages/shared-utils
       lucide-react:
         specifier: ^0.294.0
         version: 0.294.0(react@18.3.1)

@@ -1,14 +1,53 @@
-🎉 Workly Projesi Başarıyla Oluşturuldu!
+
+
+
+
+# 🎉 Workly Projesi Başarıyla Oluşturuldu!
+
 Harika! Workly microfrontend SaaS platformu başarıyla oluşturuldu. İşte projenizin özeti:
-📊 Proje Yapısı
-🚀 Projeyi Çalıştırma
-1️⃣ Bağımlılıkları Yükleyin
-2️⃣ Tüm Uygulamaları Başlatın
+
+## 🌐 Port Yapısı
+
+| Port | App | Framework | URL |
+|------|-----|-----------|-----|
+| **3000** | 🏠 **Landing** | Next.js 15 | http://localhost:3000 |
+| **3001** | 🔐 **Auth** | Vue 3 | http://localhost:3001 |
+| **3002** | ✅ **Task Manager** | Next.js | http://localhost:3002 |
+| **3003** | 👥 **HR Management** | Angular 17 | http://localhost:3003 |
+| **3004** | 📢 **Announcements** | Next.js | http://localhost:3004 |
+| **3005** | 📊 **Shell (Dashboard)** | Next.js 15 | http://localhost:3005 |
+
+## 📊 Proje Yapısı
+
+## 🚀 Projeyi Çalıştırma
+
+### 1️⃣ Bağımlılıkları Yükleyin
+```bash
+pnpm install
+```
+
+### 2️⃣ Tüm Uygulamaları Başlatın
+```bash
+pnpm dev
+```
+
 Bu komut şu uygulamaları başlatacak:
-Shell: http://localhost:3000
-Task Manager: http://localhost:3001
-Announcements: http://localhost:3002
-3️⃣ Bireysel Uygulama Çalıştırma
+- Landing: http://localhost:3000
+- Auth: http://localhost:3001
+- Task Manager: http://localhost:3002
+- HR Management: http://localhost:3003
+- Announcements: http://localhost:3004
+- Shell (Dashboard): http://localhost:3005
+
+### 3️⃣ Bireysel Uygulama Çalıştırma
+```bash
+pnpm dev:landing    # Port 3000
+pnpm dev:auth       # Port 3001
+pnpm dev:task       # Port 3002
+pnpm dev:hr         # Port 3003
+pnpm dev:announce   # Port 3004
+pnpm dev:shell      # Port 3005
+```
 ✨ Oluşturulan Özellikler
 🏠 Shell (Dashboard)
 Modern dashboard tasarımı
