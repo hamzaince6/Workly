@@ -14,17 +14,17 @@ import { Department, EmployeeStatus } from '@workly/shared-types';
       <div class="card">
         <div class="card-header">
           <h2 class="text-2xl font-bold text-gray-900">
-            {{ isEditMode() ? 'Edit Employee' : 'Add New Employee' }}
+            {{ isEditMode() ? 'Çalışanı Düzenle' : 'Yeni Çalışan Ekle' }}
           </h2>
         </div>
 
         <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="card-body space-y-6">
           <!-- Personal Information -->
           <div>
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Personal Information</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Kişisel Bilgiler</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="form-group">
-                <label class="form-label">First Name *</label>
+                <label class="form-label">Ad *</label>
                 <input
                   type="text"
                   formControlName="firstName"
@@ -32,12 +32,12 @@ import { Department, EmployeeStatus } from '@workly/shared-types';
                   [ngClass]="{'is-invalid': isFieldInvalid('firstName')}"
                 />
                 <div *ngIf="isFieldInvalid('firstName')" class="invalid-feedback">
-                  First name is required
+                  Ad gereklidir
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="form-label">Last Name *</label>
+                <label class="form-label">Soyad *</label>
                 <input
                   type="text"
                   formControlName="lastName"
@@ -45,12 +45,12 @@ import { Department, EmployeeStatus } from '@workly/shared-types';
                   [ngClass]="{'is-invalid': isFieldInvalid('lastName')}"
                 />
                 <div *ngIf="isFieldInvalid('lastName')" class="invalid-feedback">
-                  Last name is required
+                  Soyad gereklidir
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="form-label">Email *</label>
+                <label class="form-label">E-posta *</label>
                 <input
                   type="email"
                   formControlName="email"
@@ -58,12 +58,12 @@ import { Department, EmployeeStatus } from '@workly/shared-types';
                   [ngClass]="{'is-invalid': isFieldInvalid('email')}"
                 />
                 <div *ngIf="isFieldInvalid('email')" class="invalid-feedback">
-                  Valid email is required
+                  Geçerli bir e-posta gereklidir
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="form-label">Phone *</label>
+                <label class="form-label">Telefon *</label>
                 <input
                   type="tel"
                   formControlName="phone"
@@ -71,7 +71,7 @@ import { Department, EmployeeStatus } from '@workly/shared-types';
                   [ngClass]="{'is-invalid': isFieldInvalid('phone')}"
                 />
                 <div *ngIf="isFieldInvalid('phone')" class="invalid-feedback">
-                  Phone number is required
+                  Telefon numarası gereklidir
                 </div>
               </div>
             </div>
@@ -79,10 +79,10 @@ import { Department, EmployeeStatus } from '@workly/shared-types';
 
           <!-- Employment Details -->
           <div>
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Employment Details</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">İstihdam Detayları</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="form-group">
-                <label class="form-label">Position *</label>
+                <label class="form-label">Pozisyon *</label>
                 <input
                   type="text"
                   formControlName="position"
@@ -90,29 +90,34 @@ import { Department, EmployeeStatus } from '@workly/shared-types';
                   [ngClass]="{'is-invalid': isFieldInvalid('position')}"
                 />
                 <div *ngIf="isFieldInvalid('position')" class="invalid-feedback">
-                  Position is required
+                  Pozisyon gereklidir
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="form-label">Department *</label>
-                <select
-                  formControlName="department"
-                  class="form-control"
-                  [ngClass]="{'is-invalid': isFieldInvalid('department')}"
-                >
-                  <option value="">Select Department</option>
-                  <option [value]="dept" *ngFor="let dept of departments">
-                    {{ dept }}
-                  </option>
-                </select>
+                <label class="form-label">Departman *</label>
+                <div class="relative">
+                  <select
+                    formControlName="department"
+                    class="form-control appearance-none pr-10"
+                    [ngClass]="{'is-invalid': isFieldInvalid('department')}"
+                  >
+                    <option value="">Departman Seçin</option>
+                    <option [value]="dept" *ngFor="let dept of departments">
+                      {{ departmentLabels[dept] }}
+                    </option>
+                  </select>
+                  <svg class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                  </svg>
+                </div>
                 <div *ngIf="isFieldInvalid('department')" class="invalid-feedback">
-                  Department is required
+                  Departman gereklidir
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="form-label">Start Date *</label>
+                <label class="form-label">Başlangıç Tarihi *</label>
                 <input
                   type="date"
                   formControlName="startDate"
@@ -120,12 +125,12 @@ import { Department, EmployeeStatus } from '@workly/shared-types';
                   [ngClass]="{'is-invalid': isFieldInvalid('startDate')}"
                 />
                 <div *ngIf="isFieldInvalid('startDate')" class="invalid-feedback">
-                  Start date is required
+                  Başlangıç tarihi gereklidir
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="form-label">Salary *</label>
+                <label class="form-label">Maaş *</label>
                 <input
                   type="number"
                   formControlName="salary"
@@ -133,21 +138,26 @@ import { Department, EmployeeStatus } from '@workly/shared-types';
                   [ngClass]="{'is-invalid': isFieldInvalid('salary')}"
                 />
                 <div *ngIf="isFieldInvalid('salary')" class="invalid-feedback">
-                  Salary is required
+                  Maaş gereklidir
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="form-label">Status *</label>
-                <select
-                  formControlName="status"
-                  class="form-control"
-                  [ngClass]="{'is-invalid': isFieldInvalid('status')}"
-                >
-                  <option [value]="status" *ngFor="let status of statuses">
-                    {{ status }}
-                  </option>
-                </select>
+                <label class="form-label">Durum *</label>
+                <div class="relative">
+                  <select
+                    formControlName="status"
+                    class="form-control appearance-none pr-10"
+                    [ngClass]="{'is-invalid': isFieldInvalid('status')}"
+                  >
+                    <option [value]="status" *ngFor="let status of statuses">
+                      {{ statusLabels[status] }}
+                    </option>
+                  </select>
+                  <svg class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                  </svg>
+                </div>
               </div>
 
               <div class="form-group">
@@ -164,7 +174,7 @@ import { Department, EmployeeStatus } from '@workly/shared-types';
 
           <!-- Skills -->
           <div>
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Skills (comma separated)</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Yetenekler (virgülle ayırın)</h3>
             <div class="form-group">
               <input
                 type="text"
@@ -182,14 +192,14 @@ import { Department, EmployeeStatus } from '@workly/shared-types';
               class="btn btn-secondary"
               (click)="onCancel()"
             >
-              Cancel
+              İptal
             </button>
             <button
               type="submit"
               class="btn btn-primary"
               [disabled]="employeeForm.invalid || isSubmitting()"
             >
-              {{ isSubmitting() ? 'Saving...' : (isEditMode() ? 'Update' : 'Create') }}
+              {{ isSubmitting() ? 'Kaydediliyor...' : (isEditMode() ? 'Güncelle' : 'Oluştur') }}
             </button>
           </div>
         </form>
@@ -211,6 +221,25 @@ export class EmployeeFormComponent implements OnInit {
 
   departments = Object.values(Department);
   statuses = Object.values(EmployeeStatus);
+
+  // Türkçe çevirileri
+  departmentLabels: Record<string, string> = {
+    [Department.ENGINEERING]: 'Mühendislik',
+    [Department.HR]: 'İnsan Kaynakları',
+    [Department.SALES]: 'Satış',
+    [Department.MARKETING]: 'Pazarlama',
+    [Department.FINANCE]: 'Finans',
+    [Department.OPERATIONS]: 'Operasyon',
+    [Department.IT]: 'Bilgi Teknolojileri',
+    [Department.CUSTOMER_SERVICE]: 'Müşteri Hizmetleri',
+  };
+
+  statusLabels: Record<string, string> = {
+    [EmployeeStatus.ACTIVE]: 'Aktif',
+    [EmployeeStatus.ON_LEAVE]: 'İzinli',
+    [EmployeeStatus.TERMINATED]: 'İşten Ayrıldı',
+    [EmployeeStatus.SUSPENDED]: 'Askıda',
+  };
 
   ngOnInit(): void {
     this.employeeId = this.route.snapshot.paramMap.get('id');

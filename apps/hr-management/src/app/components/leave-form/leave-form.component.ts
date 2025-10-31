@@ -14,51 +14,61 @@ import { LeaveType, LeaveStatus } from '@workly/shared-types';
     <div class="max-w-2xl mx-auto">
       <div class="card">
         <div class="card-header">
-          <h2 class="text-2xl font-bold text-gray-900">Request Leave</h2>
+          <h2 class="text-2xl font-bold text-gray-900">İzin Talebi Oluştur</h2>
         </div>
 
         <form [formGroup]="leaveForm" (ngSubmit)="onSubmit()" class="card-body space-y-6">
           <!-- Employee Selection -->
           <div class="form-group">
-            <label class="form-label">Employee *</label>
-            <select
-              formControlName="employeeId"
-              class="form-control"
-              [ngClass]="{'is-invalid': isFieldInvalid('employeeId')}"
-              (change)="onEmployeeChange($event)"
-            >
-              <option value="">Select Employee</option>
-              <option [value]="emp.id" *ngFor="let emp of employees()">
-                {{ emp.firstName }} {{ emp.lastName }} - {{ emp.position }}
-              </option>
-            </select>
+            <label class="form-label">Çalışan *</label>
+            <div class="relative">
+              <select
+                formControlName="employeeId"
+                class="form-control appearance-none pr-10"
+                [ngClass]="{'is-invalid': isFieldInvalid('employeeId')}"
+                (change)="onEmployeeChange($event)"
+              >
+                <option value="">Çalışan Seçin</option>
+                <option [value]="emp.id" *ngFor="let emp of employees()">
+                  {{ emp.firstName }} {{ emp.lastName }} - {{ emp.position }}
+                </option>
+              </select>
+              <svg class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
             <div *ngIf="isFieldInvalid('employeeId')" class="invalid-feedback">
-              Employee is required
+              Çalışan seçimi gereklidir
             </div>
           </div>
 
           <!-- Leave Type -->
           <div class="form-group">
-            <label class="form-label">Leave Type *</label>
-            <select
-              formControlName="leaveType"
-              class="form-control"
-              [ngClass]="{'is-invalid': isFieldInvalid('leaveType')}"
-            >
-              <option value="">Select Leave Type</option>
-              <option [value]="type" *ngFor="let type of leaveTypes">
-                {{ type }}
-              </option>
-            </select>
+            <label class="form-label">İzin Tipi *</label>
+            <div class="relative">
+              <select
+                formControlName="leaveType"
+                class="form-control appearance-none pr-10"
+                [ngClass]="{'is-invalid': isFieldInvalid('leaveType')}"
+              >
+                <option value="">İzin Tipi Seçin</option>
+                <option [value]="type" *ngFor="let type of leaveTypes">
+                  {{ leaveTypeLabels[type] }}
+                </option>
+              </select>
+              <svg class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
             <div *ngIf="isFieldInvalid('leaveType')" class="invalid-feedback">
-              Leave type is required
+              İzin tipi gereklidir
             </div>
           </div>
 
           <!-- Date Range -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="form-group">
-              <label class="form-label">Start Date *</label>
+              <label class="form-label">Başlangıç Tarihi *</label>
               <input
                 type="date"
                 formControlName="startDate"
@@ -66,12 +76,12 @@ import { LeaveType, LeaveStatus } from '@workly/shared-types';
                 [ngClass]="{'is-invalid': isFieldInvalid('startDate')}"
               />
               <div *ngIf="isFieldInvalid('startDate')" class="invalid-feedback">
-                Start date is required
+                Başlangıç tarihi gereklidir
               </div>
             </div>
 
             <div class="form-group">
-              <label class="form-label">End Date *</label>
+              <label class="form-label">Bitiş Tarihi *</label>
               <input
                 type="date"
                 formControlName="endDate"
@@ -79,42 +89,42 @@ import { LeaveType, LeaveStatus } from '@workly/shared-types';
                 [ngClass]="{'is-invalid': isFieldInvalid('endDate')}"
               />
               <div *ngIf="isFieldInvalid('endDate')" class="invalid-feedback">
-                End date is required
+                Bitiş tarihi gereklidir
               </div>
             </div>
           </div>
 
           <!-- Duration Display -->
-          <div *ngIf="leaveForm.get('startDate')?.value && leaveForm.get('endDate')?.value" class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <div class="text-sm text-blue-900">
-              <strong>Duration:</strong>
-              {{ calculateDuration() }} day{{ calculateDuration() !== 1 ? 's' : '' }}
+          <div *ngIf="leaveForm.get('startDate')?.value && leaveForm.get('endDate')?.value" class="bg-teal-50 border border-teal-200 rounded-lg p-4">
+            <div class="text-sm text-teal-900">
+              <strong>Süre:</strong>
+              {{ calculateDuration() }} gün
             </div>
           </div>
 
           <!-- Reason -->
           <div class="form-group">
-            <label class="form-label">Reason *</label>
+            <label class="form-label">Sebep *</label>
             <textarea
               formControlName="reason"
               rows="4"
               class="form-control"
               [ngClass]="{'is-invalid': isFieldInvalid('reason')}"
-              placeholder="Please provide a reason for your leave request..."
+              placeholder="Lütfen izin talebiniz için bir sebep belirtin..."
             ></textarea>
             <div *ngIf="isFieldInvalid('reason')" class="invalid-feedback">
-              Reason is required (minimum 10 characters)
+              Sebep gereklidir (minimum 10 karakter)
             </div>
           </div>
 
           <!-- Info Box -->
           <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
-            <h4 class="font-semibold text-gray-900 mb-2">ℹ️ Important Information</h4>
+            <h4 class="font-semibold text-gray-900 mb-2">ℹ️ Önemli Bilgiler</h4>
             <ul class="text-sm text-gray-600 space-y-1 list-disc list-inside">
-              <li>Leave requests are subject to approval by your manager</li>
-              <li>Please submit requests at least 3 days in advance when possible</li>
-              <li>Emergency leaves may be submitted retrospectively</li>
-              <li>You will be notified once your request is processed</li>
+              <li>İzin talepleri yöneticinizin onayına tabidir</li>
+              <li>Lütfen mümkün olduğunca en az 3 gün önceden başvurunuzu gönderin</li>
+              <li>Acil izinler geriye dönük olarak gönderilebilir</li>
+              <li>Talebiniz işleme alındığında bilgilendirileceksiniz</li>
             </ul>
           </div>
 
@@ -125,14 +135,14 @@ import { LeaveType, LeaveStatus } from '@workly/shared-types';
               class="btn btn-secondary"
               (click)="onCancel()"
             >
-              Cancel
+              İptal
             </button>
             <button
               type="submit"
               class="btn btn-primary"
               [disabled]="leaveForm.invalid"
             >
-              Submit Request
+              Talebi Gönder
             </button>
           </div>
         </form>
@@ -151,6 +161,16 @@ export class LeaveFormComponent implements OnInit {
   employees = this.employeeService.employees;
   leaveTypes = Object.values(LeaveType);
   selectedEmployeeName = '';
+
+  // Türkçe çevirileri
+  leaveTypeLabels: Record<string, string> = {
+    [LeaveType.ANNUAL]: 'Yıllık İzin',
+    [LeaveType.SICK]: 'Hastalık İzni',
+    [LeaveType.MATERNITY]: 'Doğum İzni',
+    [LeaveType.PATERNITY]: 'Babalık İzni',
+    [LeaveType.UNPAID]: 'Ücretsiz İzin',
+    [LeaveType.EMERGENCY]: 'Acil Durum İzni',
+  };
 
   ngOnInit(): void {
     this.leaveForm = this.fb.group({

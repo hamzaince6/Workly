@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
-import Logo from './Logo';
+import { Logo } from '@workly/shared-ui';
 
 const navigation = [
   { name: 'Anasayfa', href: '#' },
@@ -41,7 +41,7 @@ export default function Header() {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <Logo size="md" />
+          <Logo size="md" showText={true} href="/" />
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">

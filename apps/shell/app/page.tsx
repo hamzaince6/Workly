@@ -15,15 +15,15 @@ import {
 export default function DashboardPage() {
   const stats = [
     {
-      title: 'Total Employees',
+      title: 'Toplam Çalışan',
       value: '248',
       icon: Users,
       trend: '+12%',
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-50',
+      color: 'text-teal-600',
+      bgColor: 'bg-teal-50',
     },
     {
-      title: 'Active Tasks',
+      title: 'Aktif Görevler',
       value: '64',
       icon: CheckSquare,
       trend: '+8%',
@@ -31,7 +31,7 @@ export default function DashboardPage() {
       bgColor: 'bg-green-50',
     },
     {
-      title: 'Pending Leaves',
+      title: 'Bekleyen İzinler',
       value: '12',
       icon: Clock,
       trend: '-3%',
@@ -39,7 +39,7 @@ export default function DashboardPage() {
       bgColor: 'bg-yellow-50',
     },
     {
-      title: 'Announcements',
+      title: 'Duyurular',
       value: '8',
       icon: Megaphone,
       trend: '+2',
@@ -52,45 +52,45 @@ export default function DashboardPage() {
     {
       id: 1,
       type: 'employee',
-      message: 'New employee John Doe added to Engineering',
-      time: '2 hours ago',
+      message: 'Yeni çalışan Ahmet Yılmaz Mühendislik departmanına eklendi',
+      time: '2 saat önce',
       icon: Users,
     },
     {
       id: 2,
       type: 'task',
-      message: 'Task "Update Dashboard UI" marked as completed',
-      time: '4 hours ago',
+      message: '"Dashboard UI Güncellemesi" görevi tamamlandı',
+      time: '4 saat önce',
       icon: CheckSquare,
     },
     {
       id: 3,
       type: 'leave',
-      message: 'Leave request from Sarah Johnson approved',
-      time: '5 hours ago',
+      message: 'Ayşe Demir\'in izin talebi onaylandı',
+      time: '5 saat önce',
       icon: Calendar,
     },
     {
       id: 4,
       type: 'announcement',
-      message: 'New policy announcement published',
-      time: '1 day ago',
+      message: 'Yeni şirket politikası duyurusu yayınlandı',
+      time: '1 gün önce',
       icon: Megaphone,
     },
   ];
 
   const upcomingTasks = [
-    { id: 1, title: 'Q4 Performance Reviews', dueDate: 'Dec 15, 2024', priority: 'High' },
-    { id: 2, title: 'Update Employee Handbook', dueDate: 'Dec 20, 2024', priority: 'Medium' },
-    { id: 3, title: 'Team Building Event Planning', dueDate: 'Dec 25, 2024', priority: 'Low' },
+    { id: 1, title: 'Q4 Performans Değerlendirmeleri', dueDate: '15 Aralık 2024', priority: 'Yüksek' },
+    { id: 2, title: 'Çalışan El Kitabı Güncellemesi', dueDate: '20 Aralık 2024', priority: 'Orta' },
+    { id: 3, title: 'Takım Oluşturma Etkinliği Planlaması', dueDate: '25 Aralık 2024', priority: 'Düşük' },
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 p-6 overflow-y-auto h-full">
       {/* Page Header */}
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-600 mt-1">Welcome back! Here's what's happening today.</p>
+        <p className="text-gray-600 mt-1">Hoş geldiniz! Bugün neler oluyor?</p>
       </div>
 
       {/* Stats Grid */}
@@ -102,7 +102,7 @@ export default function DashboardPage() {
                 <div>
                   <p className="text-sm font-medium text-gray-600">{stat.title}</p>
                   <p className="text-3xl font-bold text-gray-900 mt-2">{stat.value}</p>
-                  <p className="text-sm text-green-600 mt-1">{stat.trend} from last month</p>
+                  <p className="text-sm text-green-600 mt-1">{stat.trend} geçen aya göre</p>
                 </div>
                 <div className={`p-3 rounded-lg ${stat.bgColor}`}>
                   <stat.icon className={`h-6 w-6 ${stat.color}`} />
@@ -118,7 +118,7 @@ export default function DashboardPage() {
         {/* Recent Activity */}
         <Card variant="elevated">
           <CardHeader>
-            <CardTitle>Recent Activity</CardTitle>
+            <CardTitle>Son Aktiviteler</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -140,7 +140,7 @@ export default function DashboardPage() {
         {/* Upcoming Tasks */}
         <Card variant="elevated">
           <CardHeader>
-            <CardTitle>Upcoming Deadlines</CardTitle>
+            <CardTitle>Yaklaşan Son Tarihler</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -152,9 +152,9 @@ export default function DashboardPage() {
                   </div>
                   <span
                     className={`px-2 py-1 text-xs font-medium rounded-full ${
-                      task.priority === 'High'
+                      task.priority === 'Yüksek'
                         ? 'bg-red-100 text-red-800'
-                        : task.priority === 'Medium'
+                        : task.priority === 'Orta'
                         ? 'bg-yellow-100 text-yellow-800'
                         : 'bg-green-100 text-green-800'
                     }`}
@@ -171,25 +171,25 @@ export default function DashboardPage() {
       {/* Quick Actions */}
       <Card variant="elevated">
         <CardHeader>
-          <CardTitle>Quick Actions</CardTitle>
+          <CardTitle>Hızlı İşlemler</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <button className="p-4 text-center rounded-lg border-2 border-dashed border-gray-300 hover:border-blue-500 hover:bg-blue-50 transition-colors">
+            <button className="p-4 text-center rounded-lg border-2 border-dashed border-gray-300 hover:border-teal-500 hover:bg-teal-50 transition-colors">
               <Users className="h-6 w-6 text-gray-600 mx-auto mb-2" />
-              <span className="text-sm font-medium text-gray-900">Add Employee</span>
+              <span className="text-sm font-medium text-gray-900">Çalışan Ekle</span>
             </button>
-            <button className="p-4 text-center rounded-lg border-2 border-dashed border-gray-300 hover:border-blue-500 hover:bg-blue-50 transition-colors">
+            <button className="p-4 text-center rounded-lg border-2 border-dashed border-gray-300 hover:border-teal-500 hover:bg-teal-50 transition-colors">
               <CheckSquare className="h-6 w-6 text-gray-600 mx-auto mb-2" />
-              <span className="text-sm font-medium text-gray-900">Create Task</span>
+              <span className="text-sm font-medium text-gray-900">Görev Oluştur</span>
             </button>
-            <button className="p-4 text-center rounded-lg border-2 border-dashed border-gray-300 hover:border-blue-500 hover:bg-blue-50 transition-colors">
+            <button className="p-4 text-center rounded-lg border-2 border-dashed border-gray-300 hover:border-teal-500 hover:bg-teal-50 transition-colors">
               <Megaphone className="h-6 w-6 text-gray-600 mx-auto mb-2" />
-              <span className="text-sm font-medium text-gray-900">New Announcement</span>
+              <span className="text-sm font-medium text-gray-900">Duyuru Yayınla</span>
             </button>
-            <button className="p-4 text-center rounded-lg border-2 border-dashed border-gray-300 hover:border-blue-500 hover:bg-blue-50 transition-colors">
+            <button className="p-4 text-center rounded-lg border-2 border-dashed border-gray-300 hover:border-teal-500 hover:bg-teal-50 transition-colors">
               <Award className="h-6 w-6 text-gray-600 mx-auto mb-2" />
-              <span className="text-sm font-medium text-gray-900">Review Performance</span>
+              <span className="text-sm font-medium text-gray-900">Performans İncele</span>
             </button>
           </div>
         </CardContent>

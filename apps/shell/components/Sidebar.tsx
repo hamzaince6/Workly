@@ -11,7 +11,7 @@ import {
   Settings,
   LogOut
 } from 'lucide-react';
-import { cn } from '@workly/shared-ui';
+import { cn, Logo } from '@workly/shared-ui';
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard },
@@ -28,7 +28,7 @@ export function Sidebar() {
     <div className="w-64 bg-white border-r border-gray-200 flex flex-col">
       {/* Logo */}
       <div className="h-16 flex items-center px-6 border-b border-gray-200">
-        <h1 className="text-2xl font-bold text-blue-600">Workly</h1>
+        <Logo size="md" showText={true} subtitle="Dashboard" href="/" />
       </div>
 
       {/* Navigation */}
@@ -40,10 +40,10 @@ export function Sidebar() {
               key={item.name}
               href={item.href}
               className={cn(
-                'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors',
+                'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all',
                 isActive
-                  ? 'bg-blue-50 text-blue-700'
-                  : 'text-gray-700 hover:bg-gray-50'
+                  ? 'bg-gradient-to-r from-teal-50 to-green-50 text-teal-700 shadow-sm'
+                  : 'text-gray-700 hover:bg-teal-50 hover:text-teal-600'
               )}
             >
               <item.icon className="h-5 w-5" />
@@ -57,13 +57,13 @@ export function Sidebar() {
       <div className="p-4 border-t border-gray-200">
         <Link
           href="/settings"
-          className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+          className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-teal-50 hover:text-teal-600 transition-colors"
         >
           <Settings className="h-5 w-5" />
           Settings
         </Link>
         <button
-          className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors mt-1"
+          className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-teal-50 hover:text-teal-600 transition-colors mt-1"
         >
           <LogOut className="h-5 w-5" />
           Logout

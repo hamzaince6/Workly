@@ -13,11 +13,11 @@ import { LeaveStatus, LeaveType } from '@workly/shared-types';
       <!-- Header -->
       <div class="flex justify-between items-center">
         <div>
-          <h1 class="text-3xl font-bold text-gray-900">Leave Requests</h1>
-          <p class="text-gray-600 mt-1">Manage employee leave requests</p>
+          <h1 class="text-3xl font-bold text-gray-900">İzin Talepleri</h1>
+          <p class="text-gray-600 mt-1">Çalışan izin taleplerini yönetin</p>
         </div>
         <a routerLink="/leaves/new" class="btn btn-primary">
-          + Request Leave
+          + İzin Talebi Oluştur
         </a>
       </div>
 
@@ -25,7 +25,7 @@ import { LeaveStatus, LeaveType } from '@workly/shared-types';
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div class="card">
           <div class="card-body">
-            <div class="text-sm text-gray-600">Total Requests</div>
+            <div class="text-sm text-gray-600">Toplam Talepler</div>
             <div class="text-2xl font-bold text-gray-900 mt-1">
               {{ leaves().length }}
             </div>
@@ -33,7 +33,7 @@ import { LeaveStatus, LeaveType } from '@workly/shared-types';
         </div>
         <div class="card">
           <div class="card-body">
-            <div class="text-sm text-gray-600">Pending</div>
+            <div class="text-sm text-gray-600">Bekleyen</div>
             <div class="text-2xl font-bold text-yellow-600 mt-1">
               {{ pendingCount() }}
             </div>
@@ -41,7 +41,7 @@ import { LeaveStatus, LeaveType } from '@workly/shared-types';
         </div>
         <div class="card">
           <div class="card-body">
-            <div class="text-sm text-gray-600">Approved</div>
+            <div class="text-sm text-gray-600">Onaylanan</div>
             <div class="text-2xl font-bold text-green-600 mt-1">
               {{ approvedCount() }}
             </div>
@@ -49,7 +49,7 @@ import { LeaveStatus, LeaveType } from '@workly/shared-types';
         </div>
         <div class="card">
           <div class="card-body">
-            <div class="text-sm text-gray-600">Rejected</div>
+            <div class="text-sm text-gray-600">Reddedilen</div>
             <div class="text-2xl font-bold text-red-600 mt-1">
               {{ rejectedCount() }}
             </div>
@@ -60,19 +60,40 @@ import { LeaveStatus, LeaveType } from '@workly/shared-types';
       <!-- Filters -->
       <div class="card">
         <div class="card-body">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <select class="form-control" (change)="onStatusChange($event)">
-              <option value="">All Status</option>
-              <option [value]="status" *ngFor="let status of statuses">
-                {{ status }}
-              </option>
-            </select>
-            <select class="form-control" (change)="onTypeChange($event)">
-              <option value="">All Types</option>
-              <option [value]="type" *ngFor="let type of types">
-                {{ type }}
-              </option>
-            </select>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="relative">
+              <input
+                type="text"
+                placeholder="İzin talebi ara..."
+                class="form-control pr-10"
+                (input)="onSearchChange($event)"
+              />
+              <svg class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+            </div>
+            <div class="relative">
+              <select class="form-control appearance-none pr-10" (change)="onStatusChange($event)">
+                <option value="">Tüm Durumlar</option>
+                <option [value]="status" *ngFor="let status of statuses">
+                  {{ statusLabels[status] }}
+                </option>
+              </select>
+              <svg class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+            <div class="relative">
+              <select class="form-control appearance-none pr-10" (change)="onTypeChange($event)">
+                <option value="">Tüm Tipler</option>
+                <option [value]="type" *ngFor="let type of types">
+                  {{ typeLabels[type] }}
+                </option>
+              </select>
+              <svg class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
@@ -84,13 +105,13 @@ import { LeaveStatus, LeaveType } from '@workly/shared-types';
             <table class="table">
               <thead>
                 <tr>
-                  <th>Employee</th>
-                  <th>Leave Type</th>
-                  <th>Period</th>
-                  <th>Duration</th>
-                  <th>Reason</th>
-                  <th>Status</th>
-                  <th>Actions</th>
+                  <th>Çalışan</th>
+                  <th>İzin Tipi</th>
+                  <th>Dönem</th>
+                  <th>Süre</th>
+                  <th>Sebep</th>
+                  <th>Durum</th>
+                  <th>İşlemler</th>
                 </tr>
               </thead>
               <tbody>
@@ -100,7 +121,7 @@ import { LeaveStatus, LeaveType } from '@workly/shared-types';
                   </td>
                   <td>
                     <span class="badge badge-info">
-                      {{ leave.leaveType }}
+                      {{ typeLabels[leave.leaveType] }}
                     </span>
                   </td>
                   <td class="text-gray-600 text-sm">
@@ -108,7 +129,7 @@ import { LeaveStatus, LeaveType } from '@workly/shared-types';
                     <div>{{ leave.endDate | date: 'MMM d, yyyy' }}</div>
                   </td>
                   <td class="font-medium text-gray-900">
-                    {{ calculateDuration(leave.startDate, leave.endDate) }} days
+                    {{ calculateDuration(leave.startDate, leave.endDate) }} gün
                   </td>
                   <td class="text-gray-600 max-w-xs truncate">
                     {{ leave.reason }}
@@ -122,26 +143,32 @@ import { LeaveStatus, LeaveType } from '@workly/shared-types';
                         'badge-danger': leave.status === 'Rejected'
                       }"
                     >
-                      {{ leave.status }}
+                      {{ statusLabels[leave.status] }}
                     </span>
                   </td>
                   <td>
                     <div *ngIf="leave.status === 'Pending'" class="flex gap-2">
                       <button
                         (click)="approveLeave(leave.id)"
-                        class="text-green-600 hover:text-green-700 text-sm font-medium"
+                        class="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
+                        title="Onayla"
                       >
-                        Approve
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
                       </button>
                       <button
                         (click)="rejectLeave(leave.id)"
-                        class="text-red-600 hover:text-red-700 text-sm font-medium"
+                        class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                        title="Reddet"
                       >
-                        Reject
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
                       </button>
                     </div>
                     <div *ngIf="leave.status !== 'Pending'" class="text-sm text-gray-500">
-                      {{ leave.status === 'Approved' ? 'Approved' : 'Rejected' }}
+                      {{ leave.status === 'Approved' ? 'Onaylandı' : 'Reddedildi' }}
                       <div class="text-xs">{{ leave.approvalDate | date: 'short' }}</div>
                     </div>
                   </td>
@@ -157,10 +184,10 @@ import { LeaveStatus, LeaveType } from '@workly/shared-types';
         <div class="card-body text-center py-12">
           <div class="text-gray-400 text-4xl mb-4">📅</div>
           <h3 class="text-lg font-semibold text-gray-900 mb-2">
-            No leave requests found
+            İzin talebi bulunamadı
           </h3>
           <p class="text-gray-600">
-            Try adjusting your filters or create a new leave request
+            Filtrelerinizi ayarlayın veya yeni bir izin talebi oluşturun
           </p>
         </div>
       </div>
@@ -172,11 +199,29 @@ export class LeaveListComponent {
   private leaveService = inject(LeaveService);
 
   leaves = this.leaveService.leaves;
+  searchTerm = signal('');
   selectedStatus = signal('');
   selectedType = signal('');
 
   statuses = Object.values(LeaveStatus);
   types = Object.values(LeaveType);
+
+  // Türkçe çevirileri
+  statusLabels: Record<string, string> = {
+    [LeaveStatus.PENDING]: 'Beklemede',
+    [LeaveStatus.APPROVED]: 'Onaylandı',
+    [LeaveStatus.REJECTED]: 'Reddedildi',
+    [LeaveStatus.CANCELLED]: 'İptal Edildi',
+  };
+
+  typeLabels: Record<string, string> = {
+    [LeaveType.ANNUAL]: 'Yıllık İzin',
+    [LeaveType.SICK]: 'Hastalık İzni',
+    [LeaveType.MATERNITY]: 'Doğum İzni',
+    [LeaveType.PATERNITY]: 'Babalık İzni',
+    [LeaveType.UNPAID]: 'Ücretsiz İzin',
+    [LeaveType.EMERGENCY]: 'Acil Durum İzni',
+  };
 
   pendingCount = computed(() =>
     this.leaves().filter(l => l.status === LeaveStatus.PENDING).length
@@ -193,6 +238,18 @@ export class LeaveListComponent {
   filteredLeaves = computed(() => {
     let filtered = this.leaves();
 
+    // Search filter
+    const search = this.searchTerm().toLowerCase();
+    if (search) {
+      filtered = filtered.filter(
+        l =>
+          l.employeeName.toLowerCase().includes(search) ||
+          l.reason.toLowerCase().includes(search) ||
+          this.typeLabels[l.leaveType].toLowerCase().includes(search) ||
+          this.statusLabels[l.status].toLowerCase().includes(search)
+      );
+    }
+
     if (this.selectedStatus()) {
       filtered = filtered.filter(l => l.status === this.selectedStatus());
     }
@@ -203,6 +260,11 @@ export class LeaveListComponent {
 
     return filtered;
   });
+
+  onSearchChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchTerm.set(input.value);
+  }
 
   onStatusChange(event: Event): void {
     const select = event.target as HTMLSelectElement;
@@ -227,7 +289,7 @@ export class LeaveListComponent {
   }
 
   rejectLeave(id: string): void {
-    if (confirm('Are you sure you want to reject this leave request?')) {
+    if (confirm('Bu izin talebini reddetmek istediğinizden emin misiniz?')) {
       this.leaveService.updateLeaveStatus(id, LeaveStatus.REJECTED, 'emp-2');
     }
   }
