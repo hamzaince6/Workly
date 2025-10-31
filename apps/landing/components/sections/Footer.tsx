@@ -9,7 +9,7 @@ import {
   Instagram,
   Send
 } from 'lucide-react';
-import Logo from '../Logo';
+import { Logo } from '@workly/shared-ui';
 
 const footerLinks = {
   product: [
