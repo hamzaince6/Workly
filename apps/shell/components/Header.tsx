@@ -14,8 +14,7 @@ export function Header() {
         <SharedHeader
           userName="Admin Kullanıcı"
           userRole="Sistem Yöneticisi"
-          showSearch={true}
-          searchPlaceholder="Çalışanları, görevleri, duyuruları ara..."
+          showSearch={false}
           notificationCount={3}
         />
       </div>
