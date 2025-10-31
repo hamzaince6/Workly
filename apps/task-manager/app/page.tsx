@@ -1,65 +1,116 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, Badge } from '@workly/shared-ui';
+import { useRouter } from 'next/navigation';
 import { TaskStatus, Task } from '@workly/shared-types';
-import { mockTasks, getTasksByStatus } from '@/data/mock-tasks';
-import { Plus, Filter, Search } from 'lucide-react';
+import { mockTasks } from '@/data/mock-tasks';
+import { Plus, Search, Filter, ListTodo, Clock, CheckCircle2, Clipboard } from 'lucide-react';
+import { TaskCard } from '@/components/TaskCard';
 
 export default function TaskManagerPage() {
-  const [tasks] = useState<Task[]>(mockTasks);
+  const router = useRouter();
+  const [tasks, setTasks] = useState<Task[]>(mockTasks);
+  const [draggedTask, setDraggedTask] = useState<Task | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const columns = [
-    { id: TaskStatus.TODO, title: 'To Do', color: 'bg-gray-100' },
-    { id: TaskStatus.IN_PROGRESS, title: 'In Progress', color: 'bg-blue-100' },
-    { id: TaskStatus.IN_REVIEW, title: 'In Review', color: 'bg-yellow-100' },
-    { id: TaskStatus.DONE, title: 'Done', color: 'bg-green-100' },
+    { 
+      id: TaskStatus.TODO, 
+      title: 'Yapılacak', 
+      color: 'from-gray-500 to-gray-600',
+      bgColor: 'bg-gray-50',
+      icon: ListTodo,
+      iconColor: 'text-gray-600'
+    },
+    { 
+      id: TaskStatus.IN_PROGRESS, 
+      title: 'Devam Ediyor', 
+      color: 'from-blue-500 to-blue-600',
+      bgColor: 'bg-blue-50',
+      icon: Clock,
+      iconColor: 'text-blue-600'
+    },
+    { 
+      id: TaskStatus.IN_REVIEW, 
+      title: 'İncelemede', 
+      color: 'from-yellow-500 to-orange-500',
+      bgColor: 'bg-yellow-50',
+      icon: Clipboard,
+      iconColor: 'text-yellow-600'
+    },
+    { 
+      id: TaskStatus.DONE, 
+      title: 'Tamamlandı', 
+      color: 'from-green-500 to-teal-600',
+      bgColor: 'bg-green-50',
+      icon: CheckCircle2,
+      iconColor: 'text-green-600'
+    },
   ];
 
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case 'Urgent':
-        return 'danger';
-      case 'High':
-        return 'warning';
-      case 'Medium':
-        return 'info';
-      case 'Low':
-        return 'default';
-      default:
-        return 'default';
+  const getTasksByStatus = (status: TaskStatus) => {
+    return tasks.filter(task => {
+      const matchesStatus = task.status === status;
+      const matchesSearch = searchQuery
+        ? task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          task.description?.toLowerCase().includes(searchQuery.toLowerCase())
+        : true;
+      return matchesStatus && matchesSearch;
+    });
+  };
+
+  const handleDragStart = (task: Task) => {
+    setDraggedTask(task);
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (status: TaskStatus) => {
+    if (draggedTask && draggedTask.status !== status) {
+      setTasks(tasks.map(task =>
+        task.id === draggedTask.id
+          ? { ...task, status, updatedAt: new Date().toISOString() }
+          : task
+      ));
     }
+    setDraggedTask(null);
   };
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen bg-gray-50 p-6">
       {/* Header */}
       <div className="mb-6">
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">Task Manager</h1>
-            <p className="text-gray-600 mt-1">Manage and track your team's tasks</p>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-teal-500 to-green-500 flex items-center justify-center shadow-lg">
+              <ListTodo className="w-7 h-7 text-white" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Görev Yönetimi</h1>
+              <p className="text-gray-600 mt-1">Ekibinizin görevlerini yönetin ve takip edin</p>
+            </div>
           </div>
-          <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+          <button
+            onClick={() => router.push('/new')}
+            className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-teal-600 to-green-600 text-white rounded-lg hover:from-teal-700 hover:to-green-700 transition-all shadow-md hover:shadow-lg font-medium"
+          >
             <Plus className="h-5 w-5" />
-            New Task
+            Yeni Görev
           </button>
         </div>
 
-        {/* Filters */}
-        <div className="flex items-center gap-4">
-          <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search tasks..."
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-            <Filter className="h-5 w-5" />
-            Filter
-          </button>
+        {/* Search */}
+        <div className="relative max-w-md">
+          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Görevlerde ara..."
+            className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+          />
         </div>
       </div>
 
@@ -67,82 +118,79 @@ export default function TaskManagerPage() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         {columns.map((column) => {
           const count = getTasksByStatus(column.id).length;
+          const Icon = column.icon;
           return (
-            <Card key={column.id} variant="elevated">
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-600">{column.title}</p>
-                    <p className="text-2xl font-bold text-gray-900 mt-1">{count}</p>
-                  </div>
-                  <div className={`w-12 h-12 rounded-lg ${column.color} flex items-center justify-center`}>
-                    <span className="text-xl font-bold">{count}</span>
-                  </div>
+            <div
+              key={column.id}
+              className="bg-white rounded-lg border border-gray-200 p-5 hover:shadow-md transition-all"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-gray-600 mb-1">{column.title}</p>
+                  <p className="text-3xl font-bold text-gray-900">{count}</p>
                 </div>
-              </CardContent>
-            </Card>
+                <div className={`w-14 h-14 rounded-xl ${column.bgColor} flex items-center justify-center`}>
+                  <Icon className={`w-7 h-7 ${column.iconColor}`} />
+                </div>
+              </div>
+            </div>
           );
         })}
       </div>
 
       {/* Kanban Board */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {columns.map((column) => (
-          <div key={column.id} className="flex flex-col">
-            <div className={`p-3 rounded-t-lg ${column.color}`}>
-              <h3 className="font-semibold text-gray-900">{column.title}</h3>
-              <p className="text-sm text-gray-600">{getTasksByStatus(column.id).length} tasks</p>
-            </div>
-            <div className="space-y-3 p-3 bg-gray-50 rounded-b-lg min-h-[500px]">
-              {getTasksByStatus(column.id).map((task) => (
-                <Card key={task.id} variant="elevated" className="cursor-pointer hover:shadow-lg transition-shadow">
-                  <CardContent className="p-4">
-                    <div className="flex items-start justify-between mb-2">
-                      <h4 className="font-medium text-gray-900 text-sm">{task.title}</h4>
-                      <Badge variant={getPriorityColor(task.priority)} size="sm">
-                        {task.priority}
-                      </Badge>
-                    </div>
-                    <p className="text-sm text-gray-600 mb-3 line-clamp-2">{task.description}</p>
-                    
-                    {/* Tags */}
-                    {task.tags && task.tags.length > 0 && (
-                      <div className="flex flex-wrap gap-1 mb-3">
-                        {task.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-2 py-0.5 bg-gray-100 text-gray-700 rounded text-xs"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
+        {columns.map((column) => {
+          const columnTasks = getTasksByStatus(column.id);
+          const Icon = column.icon;
+          
+          return (
+            <div
+              key={column.id}
+              onDragOver={handleDragOver}
+              onDrop={() => handleDrop(column.id)}
+              className="flex flex-col"
+            >
+              {/* Column Header */}
+              <div className={`bg-gradient-to-r ${column.color} rounded-t-xl p-4 shadow-sm`}>
+                <div className="flex items-center justify-between text-white">
+                  <div className="flex items-center gap-2">
+                    <Icon className="w-5 h-5" />
+                    <h3 className="font-bold text-lg">{column.title}</h3>
+                  </div>
+                  <span className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold">
+                    {columnTasks.length}
+                  </span>
+                </div>
+              </div>
 
-                    {/* Assignee & Due Date */}
-                    <div className="flex items-center justify-between text-xs text-gray-500">
-                      {task.assigneeName && (
-                        <div className="flex items-center gap-2">
-                          <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-medium">
-                            {task.assigneeName.charAt(0)}
-                          </div>
-                          <span className="truncate max-w-[100px]">{task.assigneeName}</span>
-                        </div>
-                      )}
-                      {task.dueDate && (
-                        <span className="text-xs text-gray-500">
-                          {new Date(task.dueDate).toLocaleDateString()}
-                        </span>
-                      )}
+              {/* Column Body */}
+              <div
+                className={`${column.bgColor} rounded-b-xl p-4 min-h-[600px] space-y-3 border-l border-r border-b border-gray-200`}
+              >
+                {columnTasks.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center py-12 text-gray-400">
+                    <Icon className="w-12 h-12 mb-3 opacity-30" />
+                    <p className="text-sm font-medium">Henüz görev yok</p>
+                    <p className="text-xs mt-1">Görev ekleyin veya sürükleyin</p>
+                  </div>
+                ) : (
+                  columnTasks.map((task) => (
+                    <div
+                      key={task.id}
+                      draggable
+                      onDragStart={() => handleDragStart(task)}
+                      className="transform transition-transform hover:scale-[1.02]"
+                    >
+                      <TaskCard task={task} />
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
+                  ))
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
 }
-
