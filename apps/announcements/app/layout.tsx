@@ -5,8 +5,8 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Announcements - Workly',
-  description: 'Company announcements, news, and updates',
+  title: 'Duyurular - Workly',
+  description: 'Şirket duyuruları, haberler ve güncellemeler',
 };
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="tr">
       <body className={inter.className}>{children}</body>
     </html>
   );

@@ -11,16 +11,17 @@
     "clean": "rm -rf .next"
   },
   "dependencies": {
+    "@workly/event-bus": "workspace:*",
+    "@workly/shared-types": "workspace:*",
     "@workly/shared-ui": "workspace:*",
     "@workly/shared-utils": "workspace:*",
-    "@workly/shared-types": "workspace:*",
-    "@workly/event-bus": "workspace:*",
+    "clsx": "^2.0.0",
+    "date-fns": "^3.0.0",
+    "lucide-react": "^0.294.0",
     "next": "^15.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "clsx": "^2.0.0",
-    "lucide-react": "^0.294.0",
-    "date-fns": "^3.0.0"
+    "swiper": "^12.0.3"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
@@ -34,4 +35,3 @@
     "typescript": "^5.3.3"
   }
 }
-

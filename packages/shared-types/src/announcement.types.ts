@@ -24,21 +24,21 @@ export interface Announcement {
 }
 
 export enum AnnouncementCategory {
-  COMPANY_NEWS = 'Company News',
-  HR_UPDATE = 'HR Update',
-  POLICY = 'Policy',
-  EVENT = 'Event',
-  ACHIEVEMENT = 'Achievement',
-  TRAINING = 'Training',
-  SYSTEM = 'System',
-  GENERAL = 'General',
+  COMPANY_NEWS = 'Şirket Haberleri',
+  HR_UPDATE = 'İK Güncelleme',
+  POLICY = 'Politika',
+  EVENT = 'Etkinlik',
+  ACHIEVEMENT = 'Başarı',
+  TRAINING = 'Eğitim',
+  SYSTEM = 'Sistem',
+  GENERAL = 'Genel',
 }
 
 export enum AnnouncementPriority {
-  LOW = 'Low',
+  LOW = 'Düşük',
   NORMAL = 'Normal',
-  HIGH = 'High',
-  URGENT = 'Urgent',
+  HIGH = 'Yüksek',
+  URGENT = 'Acil',
 }
 
 export interface AnnouncementReaction {

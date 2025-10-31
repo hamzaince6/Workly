@@ -8,41 +8,95 @@ body {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f3f4f6;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
+  background: #d1d5db;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #9ca3af;
 }
 
 /* Announcement content styles */
+.announcement-content {
+  @apply text-gray-700 text-base;
+  line-height: 1.8;
+}
+
 .announcement-content h2 {
-  @apply text-2xl font-bold mt-6 mb-4 text-gray-900;
+  @apply text-2xl font-bold mt-8 mb-4 text-gray-900;
 }
 
 .announcement-content h3 {
-  @apply text-xl font-semibold mt-4 mb-3 text-gray-800;
+  @apply text-xl font-semibold mt-6 mb-3 text-gray-800;
 }
 
 .announcement-content p {
-  @apply mb-4 text-gray-700 leading-relaxed;
+  @apply mb-5 leading-relaxed;
 }
 
 .announcement-content ul {
-  @apply list-disc list-inside mb-4 space-y-2 text-gray-700;
+  @apply list-disc ml-6 mb-5 space-y-2;
+}
+
+.announcement-content li {
+  @apply mb-2 leading-relaxed;
 }
 
 .announcement-content strong {
-  @apply font-semibold text-gray-900;
+  @apply font-bold text-gray-900;
+}
+
+/* Hero Image Overlay */
+.hero-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0) 100%);
+}
+
+/* Line clamp utilities */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+
+/* Swiper pagination styles */
+.pinned-announcements-swiper {
+  position: relative;
+}
+
+.pinned-announcements-swiper .swiper-pagination {
+  bottom: 0 !important;
+  position: relative !important;
+  margin-top: 20px;
+}
+
+.pinned-announcements-swiper .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: #d1d5db;
+  opacity: 1;
+  transition: all 0.3s ease;
+  margin: 0 4px;
+}
+
+.pinned-announcements-swiper .swiper-pagination-bullet-active {
+  background: linear-gradient(to right, #14b8a6, #10b981);
+  width: 24px;
+  border-radius: 5px;
+}
+
+.pinned-announcements-swiper .swiper-slide {
+  height: auto;
 }
 
