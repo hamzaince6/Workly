@@ -1,10 +1,10 @@
-import Header from '@/components/Header';
-import Hero from '@/components/sections/Hero';
-import Features from '@/components/sections/Features';
-import Modules from '@/components/sections/Modules';
-import Testimonials from '@/components/sections/Testimonials';
-import CTA from '@/components/sections/CTA';
-import Footer from '@/components/sections/Footer';
+import Header from '../components/Header';
+import Hero from '../components/sections/Hero';
+import Features from '../components/sections/Features';
+import Modules from '../components/sections/Modules';
+import Testimonials from '../components/sections/Testimonials';
+import CTA from '../components/sections/CTA';
+import Footer from '../components/sections/Footer';
 
 export default function LandingPage() {
   return (
