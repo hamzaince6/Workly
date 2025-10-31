@@ -19,7 +19,7 @@ import { useSidebar } from '@/contexts/SidebarContext';
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: LayoutDashboard },
-  { name: 'HR Management', href: '/hr', icon: Users },
+  { name: 'HR Management', href: '/hr-management', icon: Users },
   { name: 'Tasks', href: '/tasks', icon: CheckSquare },
   { name: 'Performance', href: '/performance', icon: TrendingUp },
   { name: 'Announcements', href: '/announcements', icon: Megaphone },

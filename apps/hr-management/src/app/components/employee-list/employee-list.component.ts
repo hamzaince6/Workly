@@ -1,6 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { EmployeeService } from '../../services/employee.service';
 import { Employee, Department, EmployeeStatus } from '@workly/shared-types';
 
@@ -12,9 +12,15 @@ import { Employee, Department, EmployeeStatus } from '@workly/shared-types';
     <div class="space-y-6">
       <!-- Header -->
       <div class="flex justify-between items-center">
-        <div>
-          <h1 class="text-3xl font-bold text-gray-900">Çalışanlar</h1>
-          <p class="text-gray-600 mt-1">İş gücünüzü yönetin</p>
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-500 to-green-500 flex items-center justify-center">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold text-gray-900">Çalışan Yönetimi</h1>
+          </div>
         </div>
         <a
           routerLink="/employees/new"
@@ -123,7 +129,11 @@ import { Employee, Department, EmployeeStatus } from '@workly/shared-types';
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let employee of filteredEmployees()">
+                <tr 
+                  *ngFor="let employee of filteredEmployees()"
+                  (click)="viewEmployee(employee.id)"
+                  class="cursor-pointer hover:bg-gray-50 transition-colors"
+                >
                   <td>
                     <div class="flex items-center gap-3">
                       <img
@@ -163,7 +173,7 @@ import { Employee, Department, EmployeeStatus } from '@workly/shared-types';
                       </span>
                     </div>
                   </td>
-                  <td>
+                  <td (click)="$event.stopPropagation()">
                     <div class="flex gap-2">
                       <a
                         [routerLink]="['/employees', employee.id]"
@@ -223,6 +233,7 @@ import { Employee, Department, EmployeeStatus } from '@workly/shared-types';
 })
 export class EmployeeListComponent {
   private employeeService = inject(EmployeeService);
+  private router = inject(Router);
 
   employees = this.employeeService.employees;
   searchTerm = signal('');
@@ -304,6 +315,10 @@ export class EmployeeListComponent {
   onStatusChange(event: Event): void {
     const select = event.target as HTMLSelectElement;
     this.selectedStatus.set(select.value);
+  }
+
+  viewEmployee(id: string): void {
+    this.router.navigate(['/employees', id]);
   }
 
   deleteEmployee(id: string): void {

@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   template: `
     <div class="min-h-screen bg-gray-50">
       <!-- Main Content -->
-      <main class="space-y-6 p-6 overflow-y-auto h-full">
+      <main class="overflow-y-auto h-full">
         <router-outlet></router-outlet>
       </main>
     </div>

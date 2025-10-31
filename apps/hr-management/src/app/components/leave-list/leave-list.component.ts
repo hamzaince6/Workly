@@ -12,9 +12,15 @@ import { LeaveStatus, LeaveType } from '@workly/shared-types';
     <div class="space-y-6">
       <!-- Header -->
       <div class="flex justify-between items-center">
-        <div>
-          <h1 class="text-3xl font-bold text-gray-900">İzin Talepleri</h1>
-          <p class="text-gray-600 mt-1">Çalışan izin taleplerini yönetin</p>
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-500 to-green-500 flex items-center justify-center">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-3xl font-bold text-gray-900">İzin Yönetimi</h1>
+          </div>
         </div>
         <a routerLink="/leaves/new" class="btn btn-primary">
           + İzin Talebi Oluştur

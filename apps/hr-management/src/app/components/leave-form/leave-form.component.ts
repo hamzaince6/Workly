@@ -11,16 +11,29 @@ import { LeaveType, LeaveStatus } from '@workly/shared-types';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   template: `
-    <div class="max-w-2xl mx-auto">
-      <div class="card">
-        <div class="card-header">
-          <h2 class="text-2xl font-bold text-gray-900">İzin Talebi Oluştur</h2>
+    <div class="space-y-6">
+      <!-- Header -->
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-500 to-green-500 flex items-center justify-center">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
         </div>
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900">İzin Talebi Oluştur</h1>
+        </div>
+      </div>
 
+      <div class="card">
         <form [formGroup]="leaveForm" (ngSubmit)="onSubmit()" class="card-body space-y-6">
           <!-- Employee Selection -->
           <div class="form-group">
-            <label class="form-label">Çalışan *</label>
+            <label class="form-label flex items-center gap-2">
+              <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+              </svg>
+              Çalışan *
+            </label>
             <div class="relative">
               <select
                 formControlName="employeeId"
@@ -44,7 +57,12 @@ import { LeaveType, LeaveStatus } from '@workly/shared-types';
 
           <!-- Leave Type -->
           <div class="form-group">
-            <label class="form-label">İzin Tipi *</label>
+            <label class="form-label flex items-center gap-2">
+              <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+              </svg>
+              İzin Tipi *
+            </label>
             <div class="relative">
               <select
                 formControlName="leaveType"
@@ -66,30 +84,48 @@ import { LeaveType, LeaveStatus } from '@workly/shared-types';
           </div>
 
           <!-- Date Range -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="form-group">
-              <label class="form-label">Başlangıç Tarihi *</label>
-              <input
-                type="date"
-                formControlName="startDate"
-                class="form-control"
-                [ngClass]="{'is-invalid': isFieldInvalid('startDate')}"
-              />
-              <div *ngIf="isFieldInvalid('startDate')" class="invalid-feedback">
-                Başlangıç tarihi gereklidir
+          <div>
+            <h3 class="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2">
+              <svg class="w-4 h-4 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              Tarih Aralığı
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="form-group">
+                <label class="form-label flex items-center gap-2">
+                  <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
+                  </svg>
+                  Başlangıç Tarihi *
+                </label>
+                <input
+                  type="date"
+                  formControlName="startDate"
+                  class="form-control"
+                  [ngClass]="{'is-invalid': isFieldInvalid('startDate')}"
+                />
+                <div *ngIf="isFieldInvalid('startDate')" class="invalid-feedback">
+                  Başlangıç tarihi gereklidir
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label class="form-label">Bitiş Tarihi *</label>
-              <input
-                type="date"
-                formControlName="endDate"
-                class="form-control"
-                [ngClass]="{'is-invalid': isFieldInvalid('endDate')}"
-              />
-              <div *ngIf="isFieldInvalid('endDate')" class="invalid-feedback">
-                Bitiş tarihi gereklidir
+              <div class="form-group">
+                <label class="form-label flex items-center gap-2">
+                  <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                  </svg>
+                  Bitiş Tarihi *
+                </label>
+                <input
+                  type="date"
+                  formControlName="endDate"
+                  class="form-control"
+                  [ngClass]="{'is-invalid': isFieldInvalid('endDate')}"
+                />
+                <div *ngIf="isFieldInvalid('endDate')" class="invalid-feedback">
+                  Bitiş tarihi gereklidir
+                </div>
               </div>
             </div>
           </div>
@@ -104,7 +140,12 @@ import { LeaveType, LeaveStatus } from '@workly/shared-types';
 
           <!-- Reason -->
           <div class="form-group">
-            <label class="form-label">Sebep *</label>
+            <label class="form-label flex items-center gap-2">
+              <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+              Sebep *
+            </label>
             <textarea
               formControlName="reason"
               rows="4"
