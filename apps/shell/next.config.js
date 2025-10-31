@@ -1,24 +1,26 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  transpilePackages: [
-    '@workly/shared-ui',
-    '@workly/shared-utils',
-    '@workly/shared-types',
-    '@workly/event-bus',
-  ],
-  // Module Federation will be configured here later
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.output.publicPath = 'auto';
-    }
-    return config;
+  async rewrites() {
+    return [
+      // Landing page için
+      {
+        source: '/',
+        destination: process.env.LANDING_URL || 'http://localhost:3000',
+      },
+    ];
   },
-  // Enable experimental features for module federation
-  experimental: {
-    // Features can be added here as needed
+  // Micro-frontend'ler için CORS
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET,POST,PUT,DELETE,OPTIONS' },
+        ],
+      },
+    ];
   },
 };
 
 module.exports = nextConfig;
-
