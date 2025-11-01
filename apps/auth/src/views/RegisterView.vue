@@ -237,7 +237,7 @@
         <!-- Back to Home -->
         <div class="mt-6 text-center">
           <a
-            href="http://localhost:3000"
+            :href="landingUrl"
             class="text-gray-600 hover:text-gray-900 text-sm inline-flex items-center gap-1"
           >
             ← Ana Sayfaya Dön
@@ -265,6 +265,9 @@ const password = ref('');
 const confirmPassword = ref('');
 const acceptTerms = ref(false);
 const isLoading = ref(false);
+
+// Environment variables
+const landingUrl = import.meta.env.VITE_LANDING_URL || 'https://workly-landing.vercel.app';
 
 const handleRegister = async () => {
   if (password.value !== confirmPassword.value) {

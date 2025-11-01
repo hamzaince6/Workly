@@ -181,7 +181,7 @@
         <!-- Back to Home -->
         <div class="mt-6 text-center">
           <a
-            href="http://localhost:3000"
+            :href="landingUrl"
             class="text-gray-600 hover:text-gray-900 text-sm inline-flex items-center gap-1"
           >
             ← Ana Sayfaya Dön
@@ -207,6 +207,10 @@ const email = ref('');
 const password = ref('');
 const rememberMe = ref(false);
 
+// Environment variables
+const shellUrl = import.meta.env.VITE_SHELL_URL || 'https://workly-shell.vercel.app';
+const landingUrl = import.meta.env.VITE_LANDING_URL || 'https://workly-landing.vercel.app';
+
 const handleLogin = async () => {
   try {
     const success = await authStore.login(email.value, password.value);
@@ -214,8 +218,6 @@ const handleLogin = async () => {
     if (success) {
       toast.success('Giriş başarılı! Yönlendiriliyorsunuz...');
       setTimeout(() => {
-        // Root .env'den VITE_SHELL_URL kullan
-        const shellUrl = import.meta.env.VITE_SHELL_URL || 'https://workly-shell.vercel.app';
         window.location.href = shellUrl;
       }, 1000);
     } else {

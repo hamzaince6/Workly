@@ -34,6 +34,7 @@ export default defineConfig(({ mode }) => {
     base: '/',
     // Root .env'den environment variables'ları expose et
     define: {
+      'import.meta.env.VITE_LANDING_URL': JSON.stringify(env.VITE_LANDING_URL),
       'import.meta.env.VITE_SHELL_URL': JSON.stringify(env.VITE_SHELL_URL),
       'import.meta.env.VITE_AUTH_URL': JSON.stringify(env.VITE_AUTH_URL),
     },

@@ -204,7 +204,7 @@
         <!-- Back to Home -->
         <div class="mt-6 text-center">
           <a
-            href="http://localhost:3000"
+            :href="landingUrl"
             class="text-gray-600 hover:text-gray-900 text-sm inline-flex items-center gap-1"
           >
             ← Ana Sayfaya Dön
@@ -225,6 +225,9 @@ const toast = useToast();
 const email = ref('');
 const isLoading = ref(false);
 const emailSent = ref(false);
+
+// Environment variables
+const landingUrl = import.meta.env.VITE_LANDING_URL || 'https://workly-landing.vercel.app';
 
 const handleSubmit = async () => {
   try {
