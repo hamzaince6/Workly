@@ -214,9 +214,8 @@ const handleLogin = async () => {
     if (success) {
       toast.success('Giriş başarılı! Yönlendiriliyorsunuz...');
       setTimeout(() => {
-        // Shell URL'ine yönlendir
-        const shellUrl = import.meta.env.VITE_SHELL_URL || 'https://workly-shell.vercel.app';
-        window.location.href = shellUrl;
+        // Production'da her zaman Vercel URL'ini kullan
+        window.location.href = 'https://workly-shell.vercel.app';
       }, 1000);
     } else {
       toast.error(authStore.error || 'Giriş başarısız. Lütfen bilgilerinizi kontrol edin.');
