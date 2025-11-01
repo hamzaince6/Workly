@@ -49,19 +49,19 @@ export default function DashboardPage() {
   ];
 
   return (
-    <div className="space-y-6 p-6 overflow-y-auto h-full bg-gray-50">
+    <div className="space-y-4 sm:space-y-6 p-4 sm:p-6 overflow-y-auto h-full bg-gray-50">
       {/* Welcome Card */}
       <WelcomeCard userName="Admin Kullanıcı" userRole="Sistem Yöneticisi" />
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
         {stats.map((stat) => (
           <StatsCard key={stat.title} {...stat} />
         ))}
       </div>
 
       {/* Charts Grid - 2 Columns */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
         {/* Employee Growth Chart */}
         <EmployeeGrowthChart />
 
@@ -70,14 +70,14 @@ export default function DashboardPage() {
       </div>
 
       {/* Bottom Grid - Task Status & Recent Activity */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
         {/* Task Status - 1/2 width */}
-        <div className="h-[500px]">
+        <div className="h-[500px] sm:h-[450px] lg:h-[500px]">
           <TaskStatusChart />
         </div>
 
         {/* Recent Activity - 1/2 width */}
-        <div className="h-[500px]">
+        <div className="h-[500px] sm:h-[450px] lg:h-[500px]">
           <RecentActivity />
         </div>
       </div>

@@ -126,7 +126,7 @@
         </div>
 
         <!-- Header -->
-        <div class="mb-8">
+        <div class="mb-8 text-center">
           <h2 class="text-3xl font-bold text-gray-900 mb-2">Hesap Oluştur</h2>
           <p class="text-gray-600">Workly'de yeni bir hesap açın</p>
         </div>
