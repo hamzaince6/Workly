@@ -38,7 +38,8 @@ router.beforeEach((to, from, next) => {
   
   if (authStore.isAuthenticated && publicRoutes.includes(to.name as string)) {
     // Redirect to dashboard if already logged in
-    window.location.href = 'http://localhost:3005';
+    const shellUrl = import.meta.env.VITE_SHELL_URL || 'https://workly-shell.vercel.app';
+    window.location.href = shellUrl;
     return;
   }
   
