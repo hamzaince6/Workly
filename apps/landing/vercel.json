@@ -1,7 +1,8 @@
 {
-  "buildCommand": "cd ../.. && pnpm install && pnpm build --filter=landing",
+  "buildCommand": "cd ../.. && pnpm install --shamefully-hoist && pnpm build --filter=landing",
   "outputDirectory": ".next",
-  "installCommand": "pnpm install",
-  "framework": "nextjs"
+  "installCommand": "pnpm install --shamefully-hoist",
+  "framework": "nextjs",
+  "devCommand": "cd ../.. && pnpm dev --filter=landing"
 }
 
