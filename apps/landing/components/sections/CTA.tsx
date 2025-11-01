@@ -49,7 +49,7 @@ export default function CTA() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
             <Link
-              href="http://localhost:3001"
+              href={process.env.NEXT_PUBLIC_AUTH_URL || 'https://workly-auth.vercel.app'}
               className="group inline-flex items-center justify-center gap-2 px-10 py-5 bg-white text-primary-700 font-bold rounded-xl hover:bg-gray-50 transition-all shadow-2xl hover:shadow-3xl transform hover:-translate-y-1 text-lg"
             >
               Ücretsiz Başla

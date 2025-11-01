@@ -59,13 +59,13 @@ export default function Header() {
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-4">
             <Link
-              href="http://localhost:3001"
+              href={process.env.NEXT_PUBLIC_AUTH_URL || 'https://workly-auth.vercel.app'}
               className="text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors"
             >
               Giriş Yap
             </Link>
             <Link
-              href="http://localhost:3001"
+              href={process.env.NEXT_PUBLIC_AUTH_URL || 'https://workly-auth.vercel.app'}
               className="px-6 py-2.5 bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all transform hover:-translate-y-0.5"
             >
               Ücretsiz Başla
@@ -105,14 +105,14 @@ export default function Header() {
             ))}
             <div className="pt-4 border-t border-gray-200 space-y-2">
               <Link
-                href="http://localhost:3001"
+                href={process.env.NEXT_PUBLIC_AUTH_URL || 'https://workly-auth.vercel.app'}
                 className="block px-4 py-3 text-center text-gray-700 hover:bg-gray-100 rounded-lg font-medium transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Giriş Yap
               </Link>
               <Link
-                href="http://localhost:3001"
+                href={process.env.NEXT_PUBLIC_AUTH_URL || 'https://workly-auth.vercel.app'}
                 className="block px-4 py-3 text-center bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
