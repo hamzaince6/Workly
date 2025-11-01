@@ -17,15 +17,24 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^6.13.0
         version: 6.21.0(eslint@8.57.1)(typescript@5.9.3)
+      autoprefixer:
+        specifier: ^10.4.16
+        version: 10.4.21(postcss@8.5.6)
       eslint:
         specifier: ^8.55.0
         version: 8.57.1
       eslint-config-prettier:
         specifier: ^9.1.0
         version: 9.1.2(eslint@8.57.1)
+      postcss:
+        specifier: ^8.4.32
+        version: 8.5.6
       prettier:
         specifier: ^3.1.0
         version: 3.6.2
+      tailwindcss:
+        specifier: ^3.3.6
+        version: 3.4.18
       turbo:
         specifier: ^1.11.0
         version: 1.13.4
@@ -193,7 +202,7 @@ importers:
     devDependencies:
       '@angular-devkit/build-angular':
         specifier: ^17.0.0
-        version: 17.3.17(@angular/compiler-cli@17.3.12)(@types/node@20.19.24)(typescript@5.2.2)
+        version: 17.3.17(@angular/compiler-cli@17.3.12)(@types/node@20.19.24)(tailwindcss@3.4.18)(typescript@5.2.2)
       '@angular/cli':
         specifier: ^17.0.0
         version: 17.3.17
@@ -465,7 +474,7 @@ packages:
       - chokidar
     dev: true
 
-  /@angular-devkit/build-angular@17.3.17(@angular/compiler-cli@17.3.12)(@types/node@20.19.24)(typescript@5.2.2):
+  /@angular-devkit/build-angular@17.3.17(@angular/compiler-cli@17.3.12)(@types/node@20.19.24)(tailwindcss@3.4.18)(typescript@5.2.2):
     resolution: {integrity: sha512-0kLVwjLZ5v4uIaG0K6sHJxxppS0bvjNmxHkbybU8FBW3r5MOBQh/ApsiCQKQQ8GBrQz9qSJvLJH8lsb/uR8aPQ==}
     engines: {node: ^18.13.0 || >=20.9.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
     peerDependencies:
@@ -559,6 +568,7 @@ packages:
       semver: 7.6.0
       source-map-loader: 5.0.0(webpack@5.94.0)
       source-map-support: 0.5.21
+      tailwindcss: 3.4.18
       terser: 5.29.1
       tree-kill: 1.2.2
       tslib: 2.6.2
