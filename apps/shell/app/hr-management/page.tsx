@@ -8,10 +8,11 @@ type TabType = 'employees' | 'leaves';
 
 export default function HRPage() {
   const [activeTab, setActiveTab] = useState<TabType>('employees');
+  const hrManagementUrl = process.env.NEXT_PUBLIC_HR_MANAGEMENT_URL || 'http://localhost:3003';
 
   const tabs = [
-    { id: 'employees' as TabType, label: 'Çalışanlar', icon: Users, url: 'http://localhost:3003/employees' },
-    { id: 'leaves' as TabType, label: 'İzin Talepleri', icon: Calendar, url: 'http://localhost:3003/leaves' },
+    { id: 'employees' as TabType, label: 'Çalışanlar', icon: Users, url: `${hrManagementUrl}/employees` },
+    { id: 'leaves' as TabType, label: 'İzin Talepleri', icon: Calendar, url: `${hrManagementUrl}/leaves` },
   ];
 
   const activeTabData = tabs.find(tab => tab.id === activeTab);
@@ -53,7 +54,7 @@ export default function HRPage() {
       {/* Content */}
       <div className="flex-1 p-6">
         <MicroFrontendLoader 
-          url={activeTabData?.url || 'http://localhost:3003/employees'} 
+          url={activeTabData?.url || `${hrManagementUrl}/employees`} 
           name={activeTabData?.label || 'HR Management'} 
         />
       </div>
