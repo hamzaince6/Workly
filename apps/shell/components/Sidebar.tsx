@@ -100,7 +100,12 @@ export function Sidebar() {
                 <span>Settings</span>
               </Link>
               <button
-                onClick={closeMobileMenu}
+                onClick={() => {
+                  closeMobileMenu();
+                  // Auth URL'ine yönlendir
+                  const authUrl = process.env.NEXT_PUBLIC_AUTH_URL || 'https://workly-auth.vercel.app';
+                  window.location.href = authUrl;
+                }}
                 className="w-full flex items-center gap-4 px-4 py-4 rounded-xl text-base font-medium text-gray-700 hover:bg-teal-50 hover:text-teal-600 transition-colors"
               >
                 <LogOut className="h-6 w-6 flex-shrink-0" />
@@ -183,6 +188,11 @@ export function Sidebar() {
           {!isCollapsed && <span>Settings</span>}
         </Link>
         <button
+          onClick={() => {
+            // Auth URL'ine yönlendir
+            const authUrl = process.env.NEXT_PUBLIC_AUTH_URL || 'https://workly-auth.vercel.app';
+            window.location.href = authUrl;
+          }}
           className={cn(
             'w-full flex items-center rounded-lg text-sm font-medium text-gray-700 hover:bg-teal-50 hover:text-teal-600 transition-colors mt-1',
             isCollapsed ? 'justify-center p-3' : 'gap-3 px-4 py-3'
