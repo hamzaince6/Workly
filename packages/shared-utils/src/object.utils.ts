@@ -34,7 +34,7 @@ export const pick = <T extends object, K extends keyof T>(
   return result;
 };
 
-export const isEmpty = (obj: object): boolean => {
+export const isEmptyObject = (obj: object): boolean => {
   return Object.keys(obj).length === 0;
 };
 
@@ -62,7 +62,7 @@ export const deepMerge = <T extends object>(...objects: Partial<T>[]): T => {
     return obj && typeof obj === 'object' && !Array.isArray(obj);
   };
 
-  return objects.reduce((result, obj) => {
+  return objects.reduce<T>((result, obj) => {
     Object.keys(obj).forEach((key) => {
       const resultValue = (result as any)[key];
       const objValue = (obj as any)[key];

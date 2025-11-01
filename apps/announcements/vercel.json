@@ -1,13 +1,6 @@
 {
-  "buildCommand": "cd ../.. && pnpm install && pnpm build --filter=announcements",
+  "buildCommand": "cd ../.. && pnpm build --filter=announcements",
   "outputDirectory": ".next",
-  "installCommand": "pnpm install",
-  "framework": "nextjs",
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/"
-    }
-  ]
+  "framework": "nextjs"
 }
 

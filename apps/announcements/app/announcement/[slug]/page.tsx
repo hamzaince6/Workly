@@ -11,8 +11,13 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function AnnouncementDetailPage({ params }: { params: { slug: string } }) {
-  const announcement = getAnnouncementBySlug(params.slug);
+export default async function AnnouncementDetailPage({ 
+  params 
+}: { 
+  params: Promise<{ slug: string }> 
+}) {
+  const { slug } = await params;
+  const announcement = getAnnouncementBySlug(slug);
 
   if (!announcement) {
     notFound();

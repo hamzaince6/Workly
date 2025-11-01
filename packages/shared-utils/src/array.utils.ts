@@ -120,9 +120,9 @@ export const minBy = <T>(array: T[], key: keyof T): T | undefined => {
 };
 
 export const flatten = <T>(array: (T | T[])[]): T[] => {
-  return array.reduce((flat, item) => {
-    return flat.concat(Array.isArray(item) ? flatten(item) : item);
-  }, [] as T[]);
+  return array.reduce<T[]>((flat, item) => {
+    return flat.concat(Array.isArray(item) ? flatten(item) : [item]);
+  }, []);
 };
 
 export const compact = <T>(array: (T | null | undefined | false | 0 | '')[]): T[] => {
