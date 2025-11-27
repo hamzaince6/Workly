@@ -1,7 +1,6 @@
 {
   "name": "workly",
   "version": "1.0.0",
-  "private": true,
   "description": "Workly - Enterprise HR & Task Management Microfrontend Platform",
   "author": "Hamza",
   "license": "MIT",

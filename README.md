@@ -7,6 +7,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.3-38bdf8)](https://tailwindcss.com/)
 [![pnpm](https://img.shields.io/badge/pnpm-9.x-orange)](https://pnpm.io/)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 > **Workly**, İK yönetimi, görev takibi, performans analitiği ve kurumsal iletişim için **mikro frontend tabanlı** kurumsal bir platformdur. **Next.js 15**, **Vue 3**, **Angular 17** ile geliştirilmiş ve **Vercel** üzerinde modern, ölçeklenebilir bir mimari ile deploy edilmiştir.
 
@@ -123,6 +124,7 @@ Detaylı dokümantasyon için [docs/](docs/) klasörüne bakın:
 - [📦 Ortak Paketler](docs/packages.md) - Shared packages dokümantasyonu
 - [🌐 Deployment](docs/deployment.md) - Deployment rehberi
 - [🎯 Roadmap](docs/roadmap.md) - Proje yol haritası
+- [🔓 Açık Kaynak Kurulum](docs/open-source-setup.md) - Açık kaynak yapılandırması
 
 ---
 
@@ -147,7 +149,15 @@ Katkılarınızı bekliyoruz! Lütfen şu yönergeleri takip edin:
 4. Branch'inizi push edin (`git push origin feature/harika-ozellik`)
 5. Pull Request açın
 
+📋 **Detaylı katkı rehberi için:** [CONTRIBUTING.md](CONTRIBUTING.md)  
 📋 **Katkıda bulunabileceğiniz konular için:** [Issues](https://github.com/hamzaince6/Workly/issues) sayfasına bakın.
+
+---
+
+## 🔒 Güvenlik
+
+Güvenlik açığı bulduysanız, lütfen **hamzaince001@gmail.com** adresine e-posta gönderin.  
+Detaylar için: [SECURITY.md](SECURITY.md)
 
 ---
 
