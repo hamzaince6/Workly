@@ -3,8 +3,10 @@ name: PR Check
 on:
   pull_request:
     branches: [main]
-  push:
-    branches: [main]
+  # Push'ta çalıştırmayı devre dışı bıraktık (billing sorunu nedeniyle)
+  # Push yapabilirsiniz, sadece PR açıldığında workflow çalışır
+  # push:
+  #   branches: [main]
 
 jobs:
   lint-and-type-check:
